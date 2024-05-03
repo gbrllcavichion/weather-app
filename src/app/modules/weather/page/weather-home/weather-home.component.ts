@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
+import { WeatherDatas } from '../../models/interfaces/WeatherDatas';
 
 @Component({
   selector: 'app-weather-home',
+
   templateUrl: './weather-home.component.html',
-  styleUrls: []
+
+  styleUrls: [],
 })
-export class WeatherHomeComponent implements OnInit{
+export class WeatherHomeComponent implements OnInit {
   initialCityName = 'Porto Alegre';
+
+  weatherDatas!: WeatherDatas;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -15,13 +20,18 @@ export class WeatherHomeComponent implements OnInit{
     this.getWeatherDatas(this.initialCityName);
   }
 
-  getWeatherDatas(cityName: string) : void {
-    this.weatherService.getWeatherDatas(cityName)
-    .subscribe({
-      next: (response) => {
-        console.log(response)
-      },
-      error: (error) => console.log(error),
-    })
+  getWeatherDatas(cityName: string): void {
+    this.weatherService
+      .getWeatherDatas(cityName)
+
+      .subscribe({
+        next: (response) => {
+          response && (this.weatherDatas = response);
+
+          console.log(this.weatherDatas);
+        },
+
+        error: (error) => console.log(error),
+      });
   }
 }
