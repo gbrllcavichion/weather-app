@@ -1,9 +1,9 @@
 <div class="search">
     <form #form="ngForm" (submit)="onSubmit()">
-        <input 
-            type="text" 
-            placeholder="Buscar localização" 
-            name="city" 
+        <input
+            type="text"
+            placeholder="Buscar localização"
+            name="city"
             [(ngModel)]="initialCityName"
         />
 
@@ -18,3 +18,6 @@
         </span>
     </form>
 </div>
+
+
+<app-weather-card></app-weather-card>
